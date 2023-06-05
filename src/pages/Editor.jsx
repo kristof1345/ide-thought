@@ -43,7 +43,7 @@ const Editor = () => {
     await setDoc(doc(database, user.uid, id), {
       title: "Untitled",
       desc: "Add a short description",
-      content: "<span class='editable-content'>Add Text</span>",
+      content: "<span class='editable-content' id='test'>Add Text</span>",
       docID: id,
     }).catch((err) => {
       alert(err.message);
