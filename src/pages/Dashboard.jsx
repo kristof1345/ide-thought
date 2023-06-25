@@ -22,17 +22,21 @@ const Dashboard = () => {
   }, []);
 
   const getCollection = async () => {
-    if (user) {
-      const collectionRef = collection(database, user.uid);
-      const docsSnap = await getDocs(collectionRef);
+    try {
+      if (user) {
+        const collectionRef = collection(database, user.uid);
+        const docsSnap = await getDocs(collectionRef);
 
-      if (docsSnap) {
-        const ret = docsSnap.docs.map((doc) => doc.data());
-        setData(ret);
-        setFileNum(ret.length);
-      } else {
-        console.log("docs not returned");
+        if (docsSnap) {
+          const ret = docsSnap.docs.map((doc) => doc.data());
+          setData(ret);
+          setFileNum(ret.length);
+        } else {
+          console.log("docs not returned");
+        }
       }
+    } catch (error) {
+      console.error(error);
     }
   };
 
