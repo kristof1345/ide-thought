@@ -21,19 +21,20 @@ const EditorComp = ({ content }) => {
     // let cursorPos = cursorPosition();
     if (matches != null) {
       matches.forEach((value) => {
-        console.log(matches);
+        // console.log(matches);
         if (elem.hasChildNodes()) {
-          console.log(elem.childNodes);
-          console.log(elem);
-          let children = elem.querySelectorAll(".para");
-          if (matches.length !== children.length) {
-            removeTime(elem);
-            elem.innerHTML = elem.innerHTML.replaceAll(
-              "[" + value + "]",
-              "<span class='para' data-time='latest'>[" + value + "]</span>"
-            );
-            setCaret(elem);
-          }
+          // console.log(elem.childNodes);
+          // console.log(elem);
+          // let children = elem.querySelectorAll(".para");
+          // if (matches.length === children.length) {
+          removeTime(elem);
+          // console.log(value);
+          elem.innerHTML = elem.innerHTML.replace(
+            "[" + value + "]",
+            "<span class='para' data-time='latest'>(" + value + ")</span>&nbsp;"
+          );
+          setCaret(elem);
+          // }
         }
       });
     }
