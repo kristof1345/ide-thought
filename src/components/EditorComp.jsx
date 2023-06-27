@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import parse from "html-react-parser";
 
-const EditorComp = ({ content }) => {
+const EditorComp = ({ content, autoParas }) => {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
@@ -11,11 +11,54 @@ const EditorComp = ({ content }) => {
   const addEvents = () => {
     const elems = document.querySelectorAll(".editable-content");
     elems.forEach((el) => {
-      lookForParas(el);
+      if (autoParas) {
+        lookForParas(el);
+      }
+    });
+  };
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "p" && e.ctrlKey) {
+      e.preventDefault();
+      const elems = document.querySelectorAll(".editable-content");
+      elems.forEach((el) => {
+        lookForParas(el);
+      });
+    }
+    if (e.key === "l" && e.ctrlKey) {
+      e.preventDefault();
+      const elems = document.querySelectorAll(".editable-content");
+      elems.forEach((el) => {
+        lookForLogic(el);
+      });
+    }
+  });
+
+  const lookForLogic = (elem) => {
+    const Logicals = [
+      "and",
+      "or",
+      "if",
+      "unless",
+      "then",
+      "And",
+      "Or",
+      "If",
+      "Unless",
+      "Then",
+    ];
+
+    Logicals.map((logical) => {
+      elem.innerHTML = elem.innerHTML.replace(
+        logical,
+        "<span class='logical'>" + logical + "</span>"
+      );
+      setEnd(elem);
     });
   };
 
   const lookForParas = (elem) => {
+    console.log(`run for ${elem}`);
     const text = elem.innerHTML;
     let matches = text.match(/[^[]+(?=\])/g);
     // let cursorPos = cursorPosition();
@@ -56,6 +99,25 @@ const EditorComp = ({ content }) => {
     const textNode = para.firstChild;
     const offset = 2; // Adjust this value as needed
     range.setStart(textNode, offset);
+    range.collapse(false);
+
+    const selection = window.getSelection();
+
+    // Remove any existing selections
+    selection.removeAllRanges();
+
+    // Add the new range to the selection
+    selection.addRange(range);
+  }
+
+  function setEnd(el) {
+    // let para = el.querySelector('[data-time="latest"]');
+    let range = document.createRange();
+
+    range.selectNodeContents(el);
+    // const textNode = para.firstChild;
+    // const offset = 2; // Adjust this value as needed
+    // range.setStart(textNode, offset);
     range.collapse(false);
 
     const selection = window.getSelection();

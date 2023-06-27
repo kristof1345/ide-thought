@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../firebaseConfig";
 import { BiBold, BiItalic, BiUnderline, BiUndo, BiRedo } from "react-icons/bi";
@@ -10,7 +10,17 @@ import {
   makeUnderline,
 } from "./Commands";
 
-const ToolBar = ({ localUser, id }) => {
+const ToolBar = ({ localUser, id, setAutoParas, autoParas }) => {
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+  const handleToggle2 = () => {
+    setOpen2(!open2);
+  };
+
   const saveToDB = () => {
     const title = document.getElementById("title");
     const desc = document.getElementById("desc");
@@ -70,7 +80,50 @@ const ToolBar = ({ localUser, id }) => {
           </button>
         </div>
       </div>
-      <div>
+      <div className="flex items-center gap-7">
+        <div className="relative">
+          <button
+            className="bg-zinc-200 hover:bg-zinc-300 px-3 py-1 rounded text-md"
+            onClick={() => handleToggle()}
+          >
+            Text Mutation
+          </button>
+          {open && (
+            <div className="absolute bg-zinc-100 px-0 py-1 rounded shadow-md top-12 min-w-max">
+              <div>
+                <button className="px-3 py-1 hover:bg-zinc-200 w-full">
+                  Paras <span className="text-slate-400 text-sm">ctrl+p</span>
+                </button>
+              </div>
+              <div>
+                <button className="px-3 py-1 hover:bg-zinc-200 w-full">
+                  Logicals{" "}
+                  <span className="text-slate-400 text-sm">ctrl+l</span>
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="relative">
+          <button
+            className="bg-zinc-200 hover:bg-zinc-300 px-3 py-1 rounded text-md"
+            onClick={() => handleToggle2()}
+          >
+            Auto Features
+          </button>
+          {open2 && (
+            <div className="absolute bg-zinc-100 px-3 py-1 rounded shadow-md top-12 min-w-max">
+              <div className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  checked={autoParas}
+                  onChange={() => setAutoParas((prev) => !prev)}
+                />
+                <span className="pb-1">Auto Paras</span>
+              </div>
+            </div>
+          )}
+        </div>
         <button
           onClick={() => saveToDB()}
           className="bg-zinc-200 hover:bg-zinc-300 px-5 py-1 rounded-full text-lg"

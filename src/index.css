@@ -22,5 +22,10 @@
 }
 .para {
   color: rgb(0, 0, 0);
+  font-size: 0.95rem;
   opacity: 0.5;
+}
+
+.logical {
+  font-weight: 600;
 }

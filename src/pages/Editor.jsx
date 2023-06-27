@@ -11,6 +11,7 @@ const Editor = () => {
   let { id } = useParams();
   const [localUser, setLocalUser] = useState();
   const [file, setFile] = useState({});
+  const [autoParas, setAutoParas] = useState(false);
 
   const updateDB = async (user) => {
     const docCollection = await getCollection(user);
@@ -65,7 +66,12 @@ const Editor = () => {
   return (
     <div>
       <SideNav id={id} />
-      <ToolBar localUser={localUser} id={id} />
+      <ToolBar
+        localUser={localUser}
+        id={id}
+        setAutoParas={setAutoParas}
+        autoParas={autoParas}
+      />
       <div id="editor" className="ml-64 px-32 py-24">
         {/* <button onClick={() => get()}>get</button> */}
         <div
@@ -93,7 +99,9 @@ const Editor = () => {
           )}
         </div>
         <div className="relative text-lg rounded">
-          {file.content ? <EditorComp content={file.content} /> : null}
+          {file.content ? (
+            <EditorComp content={file.content} autoParas={autoParas} />
+          ) : null}
           {file.content ? null : (
             <div className="animate-pulse absolute top-0 w-full">
               <div className="h-4 bg-gray-200 rounded-full max-w-[500px] mb-4"></div>
