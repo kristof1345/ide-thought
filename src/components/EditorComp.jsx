@@ -49,10 +49,46 @@ const EditorComp = ({ content, autoParas }) => {
     ];
 
     Logicals.map((logical) => {
-      elem.innerHTML = elem.innerHTML.replace(
-        logical,
-        "<span class='logical'>" + logical + "</span>"
-      );
+      if (elem.innerHTML.includes(" " + logical + " ")) {
+        const replacement = " " + logical + " ";
+        elem.innerHTML = elem.innerHTML.replaceAll(
+          replacement,
+          " <span class='logical'>" + logical + "</span> "
+        );
+      }
+
+      if (elem.innerHTML.includes("&nbsp;" + logical + " ")) {
+        const replacement = "&nbsp;" + logical + " ";
+        elem.innerHTML = elem.innerHTML.replaceAll(
+          replacement,
+          " <span class='logical'>" + logical + "</span> "
+        );
+      }
+
+      if (elem.innerHTML.includes(" " + logical + "&nbsp;")) {
+        const replacement = " " + logical + "&nbsp;";
+        elem.innerHTML = elem.innerHTML.replaceAll(
+          replacement,
+          " <span class='logical'>" + logical + "</span> "
+        );
+      }
+
+      if (elem.innerHTML.includes(" " + logical + ",")) {
+        const replacement = " " + logical + ",";
+        elem.innerHTML = elem.innerHTML.replaceAll(
+          replacement,
+          " <span class='logical'>" + logical + "</span>,"
+        );
+      }
+
+      if (elem.innerHTML.includes(" " + logical + ".")) {
+        const replacement = " " + logical + ".";
+        elem.innerHTML = elem.innerHTML.replaceAll(
+          replacement,
+          " <span class='logical'>" + logical + "</span>."
+        );
+      }
+
       setEnd(elem);
     });
   };
