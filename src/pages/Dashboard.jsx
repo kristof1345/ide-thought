@@ -43,7 +43,7 @@ const Dashboard = () => {
   return (
     <div>
       <SideNav setFileNum={setFileNum} />
-      <div className="ml-64 p-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-7">
+      <div className="ml-0 sm:ml-64 p-5 pt-14 sm:p-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-7">
         {data
           ? data.map((file, i) => (
               <File file={file} key={i} user={user} setFileNum={setFileNum} />

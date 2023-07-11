@@ -72,7 +72,7 @@ const Editor = () => {
         setAutoParas={setAutoParas}
         autoParas={autoParas}
       />
-      <div id="editor" className="ml-64 px-32 py-24">
+      <div id="editor" className="sm:ml-64 ml-2 sm:px-32 py-28 sm:py-24">
         {/* <button onClick={() => get()}>get</button> */}
         <div
           className="title font-bold text-5xl mb-4 focus:outline-none overflow-visible w-full rounded px-2 py-1"
@@ -81,7 +81,7 @@ const Editor = () => {
           suppressContentEditableWarning={true}
         >
           {file.title ? (
-            file.title
+            file?.title
           ) : (
             <div className="h-12 bg-gray-200 rounded-full w-80 mb-5 animate-pulse"></div>
           )}
@@ -93,7 +93,7 @@ const Editor = () => {
           suppressContentEditableWarning={true}
         >
           {file.desc ? (
-            file.desc
+            file?.desc
           ) : (
             <div className="h-8 bg-gray-200 rounded-full w-80 mb-4 animate-pulse"></div>
           )}

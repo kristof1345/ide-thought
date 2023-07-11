@@ -6,7 +6,7 @@
   /* border: 1px solid red; */
   display: block;
   /* margin-top: 2px; */
-  padding: 4px 8px 4px 8px;
+  padding: 4px;
   border-radius: 4px;
   animation: flash 700ms linear;
 }
@@ -28,4 +28,12 @@
 
 .logical {
   font-weight: 600;
+}
+
+.bitch {
+  position: fixed;
+  text-decoration: underline;
+  margin: 5px 10px;
+  padding: 5px 10px;
+  z-index: 30;
 }
