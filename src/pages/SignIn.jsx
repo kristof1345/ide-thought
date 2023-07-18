@@ -6,9 +6,7 @@ const SignIn = () => {
 
   const handleSubmit = () => {
     signInWithPopup(auth, googleProvider)
-      .then((response) => {
-        console.log(response.user);
-      })
+      .then((response) => {})
       .catch((err) => {
         alert(err.message);
       });

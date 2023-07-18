@@ -94,7 +94,6 @@ const EditorComp = ({ content, autoParas }) => {
   };
 
   const lookForParas = (elem) => {
-    console.log(`run for ${elem}`);
     const text = elem.innerHTML;
     let matches = text.match(/[^[]+(?=\])/g);
     // let cursorPos = cursorPosition();

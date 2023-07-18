@@ -25,7 +25,6 @@ const Editor = () => {
     const docsSnap = await getDocs(collectionRef);
 
     if (docsSnap) {
-      // console.log(docsSnap.docs.map((doc) => doc.id));
       return docsSnap.docs.map((doc) => doc.id);
     } else {
       console.log("docs not returned");
